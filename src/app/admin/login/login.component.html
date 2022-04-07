@@ -1,0 +1,51 @@
+<section class="feature_part padding_top">
+  <div class="container">
+    <div class="row justify-content-center bg-dark p-4 rounded">
+      <!-- <div class="col-lg-1"></div> -->
+      <div class="col-lg-6 p-5">
+        <form [formGroup]="data" (ngSubmit)="submit(data.value)">
+          <!-- Email input -->
+          <div class="form-outline mb-4 text-light">
+            <input
+              type="email"
+              id="form2Example1"
+              class="form-control"
+              name="email"
+              formControlName="email"
+            />
+            <label class="form-label" for="form2Example1">Email address</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-4 text-light">
+            <input
+              type="password"
+              id="form2Example2"
+              class="form-control"
+              name="password"
+              formControlName="password"
+            />
+            <label class="form-label" for="form2Example2">Password</label>
+          </div>
+
+          <!-- 2 column grid layout for inline styling -->
+          <div class="row mb-4">
+            <div class="col">
+              <!-- Simple link -->
+              <a href="#!" class="text-light">Forgot password?</a>
+            </div>
+          </div>
+
+          <!-- Submit button -->
+          <button
+            type="submit"
+            [disabled]="!data.valid"
+            class="btn btn-primary btn-block mb-4"
+          >
+            Sign in
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
