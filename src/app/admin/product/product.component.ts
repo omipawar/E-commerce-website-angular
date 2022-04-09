@@ -12,7 +12,6 @@ import { Component, OnInit } from '@angular/core';
 export class ProductComponent implements OnInit {
 
 
-
   available_sizes = new Array("S", "M", "L", "XL", "XXL", "XXL");
   available_colors = new Array("Red", "Green", "Blue", "Black", "Pink");
 

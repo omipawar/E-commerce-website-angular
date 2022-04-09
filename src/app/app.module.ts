@@ -13,6 +13,10 @@ import { from } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsComponent } from './admin/products/products.component';
 import { ProductComponent } from './admin/product/product.component';
+import { ShowproductsComponent } from './components/showproducts/showproducts.component';
+import { ShowproductComponent } from './components/showproduct/showproduct.component';
+import { OrdersComponent } from './admin/orders/orders.component';
+import { SubscriptionsComponent } from './admin/subscriptions/subscriptions.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { ProductComponent } from './admin/product/product.component';
     ContactComponent,
     LoginComponent,
     ProductsComponent,
-    ProductComponent
+    ProductComponent,
+    ShowproductsComponent,
+    ShowproductComponent,
+    OrdersComponent,
+    SubscriptionsComponent
   ],
   imports: [
     BrowserModule,

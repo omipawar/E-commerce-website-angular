@@ -23,25 +23,29 @@
           <th>Stock</th>
           <th>Status</th>
           <th>Action</th>
+          <th></th>
         </tr>
         <tr *ngFor="let p of products; let i = index">
-          <td>{{ i + 1 }}</td>
+          <td class="align-middle">{{ i + 1 }}</td>
           <td>
-            <img src="{{ baseurl + p.imagepath }}" style="height:100px;" />
+            <img src="{{ baseurl + p.imagepath }}" style="height:70px; width: 70px;" />
           </td>
           <!-- <td>{{ p._id }}</td> -->
-          <td>{{ p.name }}</td>
+          <td class="align-middle">{{ p.name }}</td>
           <!-- <td>{{ p.descriptions }}</td> -->
-          <td>{{ p.sizes }}</td>
-          <td>{{ p.colors }}</td>
-          <td>{{ p.mrp }}</td>
-          <td>{{ p.price }}</td>
-          <td>{{ p.instock }}</td>
-          <td>{{ p.status }}</td>
-          <td>
-            <a class="btn btn-primary m-1" routerLink="../../admin/product/{{p._id}}">Edit</a>
-            <span class="btn btn-danger" (click)="delete(p._id)">Delete</span>
+          <td class="align-middle">{{ p.sizes }}</td>
+          <td class="align-middle">{{ p.colors }}</td>
+          <td class="align-middle">{{ p.mrp }}</td>
+          <td class="align-middle">{{ p.price }}</td>
+          <td class="align-middle">{{ p.instock }}</td>
+          <td class="align-middle" >{{ p.status }}</td>
+          <td class="align-middle">
+            <a class="btn btn-primary m-1" routerLink="../../admin/product/{{p._id}}"><i class="fa fa-pencil-square-o"></i></a>
+            <span class="btn btn-danger" (click)="delete(p._id)"><i class="fa fa-trash"></i></span>
+            <a class="btn btn-primary m-1" (click)="changeStatus(p._id)">Change status</a>
+            <span class="btn btn-danger" (click)="changeStocks(p._id)">Stock</span>
           </td>
+
         </tr>
       </table>
     </div>

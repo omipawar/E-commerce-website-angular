@@ -1,6 +1,8 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieServiceService } from './../../services/cookie-service.service';
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from 'src/app/services/api-service.service';
 
 @Component({
   selector: 'app-footer',
@@ -11,8 +13,10 @@ export class FooterComponent implements OnInit {
 
   isadminloggedin: boolean = false;
   name: string = "";
+  subscribe: any = "";
+  email: string= "";
 
-  constructor(private cookie: CookieServiceService, private router: Router) { }
+  constructor(private cookie: CookieServiceService, private router: Router, private api: ApiServiceService) { }
 
   ngOnInit(): void {
     if (this.cookie.get("usertype") == "") {
@@ -22,8 +26,22 @@ export class FooterComponent implements OnInit {
       this.isadminloggedin = true;
       // this.name = this.cookie.get("name");
     }
+
+    this.subscribe = new FormGroup({
+      email: new FormControl("", Validators.compose([Validators.required]))
+    });
+
   }
 
- 
+  subscription(subscribe: any) {
+    let data = { data: subscribe };
+    this.api.post("subscription/save", data).subscribe((data: any) => {
+      this.email = data.email;
+      alert("Subscribed");
+      window.location.href="/";
+    });
+  }
+
+
 
 }

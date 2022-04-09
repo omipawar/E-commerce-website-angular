@@ -7,22 +7,12 @@
           <a class="navbar-brand" routerLink="">
             <img src="assets/img/logo.png" alt="logo" />
           </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="menu_icon"><i class="fas fa-bars"></i></span>
           </button>
 
-          <div
-            class="collapse navbar-collapse main-menu-item"
-            id="navbarSupportedContent"
-          >
+          <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" routerLink="home">Home</a>
@@ -30,22 +20,18 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="about">About</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="products">Products</a>
+              </li>
 
               <li class="nav-item dropdown" *ngIf="isadminloggedin">
-                <a
-                  class="nav-link dropdown-toggle"
-
-                  id="navbarDropdown_3"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-
-                >
+                <a class="nav-link dropdown-toggle" id="navbarDropdown_3" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
                   Admin
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                  <a class="dropdown-item" routerLink="admin/products"> Products</a>
+                  <a class="dropdown-item" routerLink="admin/products">
+                    Products</a>
                   <a class="dropdown-item" routerLink="admin/orders">Orders</a>
                   <a class="dropdown-item" routerLink="admin/subscriptions">Subscriptions</a>
                 </div>
@@ -54,38 +40,30 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="contact">Contact</a>
               </li>
+
               <li class="nav-item" *ngIf="!isadminloggedin">
-                <a class="nav-link"  routerLink="admin/login" style="color: #ff3368;">Admin Login</a>
+                <a class="nav-link" routerLink="admin/login" style="color: #ff3368">Admin Login</a>
               </li>
               <li class="nav-item" *ngIf="isadminloggedin">
-                <span class="nav-link btn" (click)="logout()" style="color: #ff3368;">Log Out</span>
+                <span class="nav-link btn" (click)="logout()" style="color: #ff3368">Log Out</span>
               </li>
             </ul>
           </div>
-          <div class="hearer_icon d-flex">
-            <a id="search_1" routerLink="javascript:void(0)"
-              ><i class="ti-search"></i
-            ></a>
+          <!-- <div class="hearer_icon d-flex">
+            <a id="search_1" routerLink="javascript:void(0)"><i class="ti-search"></i></a>
             <a routerLink=""><i class="ti-heart"></i></a>
             <div class="dropdown cart">
-              <a
-                class="dropdown-toggle"
-                routerLink="#"
-                id="navbarDropdown3"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
+              <a class="dropdown-toggle" routerLink="#" id="navbarDropdown3" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-cart-plus"></i>
               </a>
-              <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <div class="single_product">
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="single_product">
 
-                              </div>
-                          </div> -->
+                </div>
+              </div>
             </div>
-          </div>
+          </div> -->
         </nav>
       </div>
     </div>
