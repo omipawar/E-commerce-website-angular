@@ -1,5 +1,5 @@
 <!--================Single Product Area =================-->
-<div class="product_image_area section_padding">
+<div class="product_image_area section_padding" *ngIf="data != null">
   <div class="container">
     <div class="row s_product_inner justify-content-between">
       <div class="col-lg-7 col-xl-7">
@@ -58,17 +58,9 @@
       <div class="col-lg-12">
         <form [formGroup]="order" (ngSubmit)="submit(order.value)">
           <input type="hidden" name="id" formControlName="id" />
-          <div class="form-group row">
-            <div class="col-lg-6">
-              <label for="">Product ID : </label>
-              <input type="text" class="form-control" name="productid" formControlName="productid" readonly/>
-            </div>
-            <div class="col-lg-6">
-              <label for="">Order Date : </label>
-              <input type="text" class="form-control" name="orderdate" formControlName="orderdate"
-                 readonly/>
-            </div>
-          </div>
+          <input type="hidden" name="productid" formControlName="productid" />
+          <input type="hidden" name="imagepath" formControlName="imagepath" />
+          <input type="hidden" name="productname" formControlName="productname" />
           <div class="form-group row">
             <div class="col-lg-6">
               <label for="">Name : </label>
@@ -98,39 +90,28 @@
           </div>
           <div class="form-group row">
             <div class="col-lg-6">
-              <label for="">Sizes : </label>
+              <label for="">Size : </label>
               <select class="col-lg-12 form-control" name="size" formControlName="size">
                 <option value="">Select</option>
-                <option value="S">Small</option>
-                <option value="M">Medium</option>
-                <option value="L">Large</option>
-                <option value="XL">Extra Large</option>
-                <option value="XXL">XXL</option>
-                <option value="XXL">XXXL</option>
+                <option *ngFor="let size of data.sizes;" value="{{ size }}">{{ size }}</option>
               </select>
             </div>
             <div class="col-lg-6">
-              <label for="">Colors : </label>
+              <label for="">Color : </label>
               <select class="col-lg-12 form-control" name="color" formControlName="color">
                 <option value="">Select</option>
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-                <option value="black">Black</option>
-                <option value="pink">Pink</option>
+                <option *ngFor="let color of data.colors;" value="{{ color }}">{{ color }}</option>
               </select>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-lg-6">
               <label for="">Quantity : </label>
-              <input type="number" class="form-control"  name="quantity" formControlName="quantity" (change)="totals($event)"  readonly
-                 />
+              <input type="number" class="form-control"  name="quantity" formControlName="quantity" (input)="quantitychanged($event)" />
             </div>
             <div class="col-lg-6">
               <label for="">Price : </label>
-              <input type="text" class="form-control" name="price" formControlName="price"
-                readonly />
+              <input type="text" class="form-control" name="price" formControlName="price" readonly />
             </div>
           </div>
           <div class="form-group row">
@@ -140,20 +121,7 @@
             </div>
             <div class="col-lg-6">
               <label for="">Total : </label>
-              <input type="text" class="form-control" name="total" formControlName="total" readonly
-              value="{{totalamount}}"/>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-6">
-              <label for="">Status : </label>
-              <input type="text" class="form-control" name="status" formControlName="status"
-                readonly />
-            </div>
-            <div class="col-lg-6">
-              <label for="">Imagepath : </label>
-              <input type="text" class="form-control" name="imagepath" formControlName="imagepath"
-                readonly value="{{data.imagepath}}"/>
+              <input type="text" class="form-control" name="total" formControlName="total" readonly />
             </div>
           </div>
           <button type="submit" class="btn btn-success" [disabled]="!order.valid">
