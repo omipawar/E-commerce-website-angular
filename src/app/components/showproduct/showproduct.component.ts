@@ -14,7 +14,8 @@ export class ShowproductComponent implements OnInit {
 
   paymentId: string = "";
   error: any = "";
-  message:string = "Waiting";
+  message: string = "Waiting";
+  orderid:string = "";
 
   options = {
     "key": "rzp_live_swPK7rd1Iy42Cf",
@@ -22,30 +23,30 @@ export class ShowproductComponent implements OnInit {
     "name": "Abhijit Gatade",
     "description": "Web Development",
     "image": "https://www.abhijitgatade.com/assets/img/favicon.png",
-    "order_id":"",
-    "handler": function (response: any){
-        var event = new CustomEvent("payment.success",
-            {
-                detail: response,
-                bubbles: true,
-                cancelable: true
-            }
-        );
-        window.dispatchEvent(event);
+    "order_id": "",
+    "handler": function (response: any) {
+      var event = new CustomEvent("payment.success",
+        {
+          detail: response,
+          bubbles: true,
+          cancelable: true
+        }
+      );
+      window.dispatchEvent(event);
     }
     ,
     "prefill": {
-    "name": "",
-    "email": "",
-    "contact": ""
+      "name": "",
+      "email": "",
+      "contact": ""
     },
     "notes": {
-    "address": ""
+      "address": ""
     },
     "theme": {
-    "color": "#3399cc"
+      "color": "#3399cc"
     }
-    };
+  };
 
   showform: boolean = false;
   order: any;
@@ -74,7 +75,7 @@ export class ShowproductComponent implements OnInit {
     }
   }
 
-  initialize(){
+  initialize() {
     this.data.total = this.data.quantity * this.data.price + this.data.shipping;
     this.order = new FormGroup({
       id: new FormControl(""),
@@ -97,41 +98,43 @@ export class ShowproductComponent implements OnInit {
 
   show() {
     this.showform = true;
-    window.scroll(0,1000);
+    window.scroll(0, 1000);
   }
 
   submit(order: any): void {
     console.log(order);
     let data = { data: order };
     this.api.post("order/place", data).subscribe((data: any) => {
-      //alert("Order Placed........!");
+      // alert("Order Placed........!");
+      this.orderid = data._id;
+      // console.log(data._id);
       //window.location.href="products";
 
         this.paymentId = '';
         this.error = '';
 
         this.options.key = "rzp_live_swPK7rd1Iy42Cf";
-            //this.options.order_id = "1234";
-            this.options.amount = (order.total * 100).toString();
-            this.options.description = order.productname;
-            this.options.prefill.name = order.name;
-            this.options.prefill.email = order.email;
-            this.options.prefill.contact = order.mobileno;
-            var rzp1 = new Razorpay(this.options);
-            rzp1.open();
+        //this.options.order_id = "1234";
+        this.options.amount = "100";                  //(order.total * 100).toString()
+        this.options.description = order.productname;
+        this.options.prefill.name = order.name;
+        this.options.prefill.email = order.email;
+        this.options.prefill.contact = order.mobileno;
+        var rzp1 = new Razorpay(this.options);
+        rzp1.open();
 
-            rzp1.on('payment.failed', function (response: any){
-                // Todo - store this information in the server
-                console.log(response.error.code);
-                console.log(response.error.description);
-                console.log(response.error.source);
-                console.log(response.error.step);
-                console.log(response.error.reason);
-                console.log(response.error.metadata.order_id);
-                console.log(response.error.metadata.payment_id);
-                //this.error = response.error.reason;
-            });
-    })
+        rzp1.on('payment.failed', function (response: any) {
+          // Todo - store this information in the server
+          console.log(response.error.code);
+          console.log(response.error.description);
+          console.log(response.error.source);
+          console.log(response.error.step);
+          console.log(response.error.reason);
+          console.log(response.error.metadata.order_id);
+          console.log(response.error.metadata.payment_id);
+          //this.error = response.error.reason;
+        });
+    });
   }
 
   quantitychanged(event: Event) {
@@ -142,16 +145,27 @@ export class ShowproductComponent implements OnInit {
 
   @HostListener('window:payment.success', ['$event'])
   onPaymentSuccess(event: any): void {
-      // this.orderService.updateOrder(event.detail).subscribe(
-      // data => {
-      //     this.paymentId = data.message;
-      // }
-      // ,
-      // err => {
-      //     this.error = err.error.message;
-      // }
-      //);
-      this.message = "Success";
+    let data = { id: this.orderid}
+    this.api.post("order/paymentsuccess", { data: data }).subscribe((data: any) => {
+      this.data = data.data;
+      window.location.href="products";
+
+      // console.log(this.data);
+      // console.log(this.data.status);
+
+      // window.location.href="products";
+    });
+
+    // this.orderService.updateOrder(event.detail).subscribe(
+    // data => {
+    //     this.paymentId = data.message;
+    // }
+    // ,
+    // err => {
+    //     this.error = err.error.message;
+    // }
+    //);
+    this.message = "Success";
   }
 
 }

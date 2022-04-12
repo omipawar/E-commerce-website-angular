@@ -21,8 +21,7 @@ export class OrdersComponent implements OnInit {
   list() {
     this.api.post("order/list", { data: {} }).subscribe((mydata: any) => {
       this.orders = mydata.data;
-      console.log(mydata.data[0].productid);
-
+      // console.log(mydata.data[0].productid);
     });
   }
 

@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if (this.cookie.get("usertype") == "admin") {
       this.isadminloggedin = true;
-      console.log("ngoninit"+ this.isadminloggedin);
+      // console.log("ngoninit"+ this.isadminloggedin);
 
     }
 
