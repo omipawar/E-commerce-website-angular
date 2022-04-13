@@ -9,7 +9,7 @@ import { ApiServiceService } from 'src/app/services/api-service.service';
 export class SubscriptionsComponent implements OnInit {
 
   subscription:any;
-
+  
   constructor(private api:ApiServiceService) { }
 
   ngOnInit(): void {

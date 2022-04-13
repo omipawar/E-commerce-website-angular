@@ -1,135 +1,136 @@
 <!--================Single Product Area =================-->
 <div *ngIf="data != null">
-<div class="product_image_area section_padding" >
-  <div class="container">
-    <div class="row s_product_inner justify-content-between">
-      <div class="col-lg-7 col-xl-7">
-        <div class="product_slider_img">
-          <div id="vertical">
-            <div data-thumb="assets/img/product/single-product/product_1.png">
-              <img src="{{ baseurl + data.imagepath }}" />
+  <div class="product_image_area section_padding">
+    <div class="container">
+      <div class="row s_product_inner justify-content-between">
+        <div class="col-lg-7 col-xl-7">
+          <div class="product_slider_img">
+            <div id="vertical">
+              <div data-thumb="assets/img/product/single-product/product_1.png">
+                <img src="{{ baseurl + data.imagepath }}" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-5 col-xl-4">
-        <div class="s_product_text">
-          <!-- <h5>previous <span>|</span> next</h5> -->
-          <h3>{{data.name}}</h3>
-          <h2>{{data.price | currency:"INR"}}</h2>
-          <ul class="list">
-            <!-- <li>
+        <div class="col-lg-5 col-xl-4">
+          <div class="s_product_text">
+            <!-- <h5>previous <span>|</span> next</h5> -->
+            <h3>{{data.name}}</h3>
+            <h2>{{data.price | currency:"INR"}}</h2>
+            <ul class="list">
+              <!-- <li>
               <a class="active" href="#">
                 <span>Category</span> : Household</a>
             </li> -->
-            <li>
-              <a href="#"> <span>Availibility</span> : {{data.instock}}</a>
-            </li>
-          </ul>
-          <p>
-            {{data.descriptions}}
-          </p>
-          <div class="card_area d-flex justify-content-between align-items-center">
-            <!-- <div class="product_count">
-              <span class="inumber-decrement"> <i class="ti-minus"></i></span>
-              <input class="input-number" type="text" value="1" min="0" max="10">
-              <span class="number-increment"> <i class="ti-plus"></i></span>
-            </div> -->
-            <a class="btn_3" (click)="show()">Buy Now</a>
+              <li>
+                <a href="#"> <span>Availibility</span> : {{data.instock}}</a>
+              </li>
+            </ul>
+            <p>
+              {{data.descriptions}}
+            </p>
+            <div class="card_area d-flex justify-content-between align-items-center">
+              <div *ngIf="data.instock == 'Yes'">
+                <a class="btn_3" (click)="show()">Buy Now</a>
+              </div>
+              <div *ngIf="data.instock == 'No'">
+                <a class="btn_3">Out of Stock</a>
+              </div>
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!--================End Single Product Area =================-->
+  <!--================End Single Product Area =================-->
 
-<section class="our_offer p-5" *ngIf="showform == true">
-  <div class="container">
-    <div class="row align-items-center justify-content-between">
-      <div class="col-lg-12">
-        <div class="row">
-          <div class="col-lg-12">
-            <h1 style="color: black">Order Now</h1>
-          </div>
-        </div>
-        <hr />
-      </div>
-      <div class="col-lg-12">
-        <form [formGroup]="order" (ngSubmit)="submit(order.value)">
-          <input type="hidden" name="id" formControlName="id" />
-          <input type="hidden" name="productid" formControlName="productid" />
-          <input type="hidden" name="imagepath" formControlName="imagepath" />
-          <input type="hidden" name="productname" formControlName="productname" />
-          <div class="form-group row">
-            <div class="col-lg-6">
-              <label for="">Name : </label>
-              <input type="text" class="form-control" name="name" formControlName="name" />
-            </div>
-            <div class="col-lg-6">
-              <label for="">Email : </label>
-              <input type="email" class="form-control" name="email" formControlName="email" />
-            </div>
-          </div>
-
-          <div class="form-group row">
+  <section class="our_offer p-5" *ngIf="showform == true">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-lg-12">
+          <div class="row">
             <div class="col-lg-12">
-              <label for="">Address : </label>
-              <textarea class="form-control" name="address" formControlName="address"></textarea>
+              <h1 style="color: black">Order Now</h1>
             </div>
           </div>
-          <div class="form-group row">
-            <div class="col-lg-6">
-              <label for="">Mobile No : </label>
-              <input type="number" class="form-control" name="mobileno" formControlName="mobileno" />
+          <hr />
+        </div>
+        <div class="col-lg-12">
+          <form [formGroup]="order" (ngSubmit)="submit(order.value)">
+            <input type="hidden" name="id" formControlName="id" />
+            <input type="hidden" name="productid" formControlName="productid" />
+            <input type="hidden" name="imagepath" formControlName="imagepath" />
+            <input type="hidden" name="productname" formControlName="productname" />
+            <div class="form-group row">
+              <div class="col-lg-6">
+                <label for="">Name : </label>
+                <input type="text" class="form-control" name="name" formControlName="name" />
+              </div>
+              <div class="col-lg-6">
+                <label for="">Email : </label>
+                <input type="email" class="form-control" name="email" formControlName="email" />
+              </div>
             </div>
-            <div class="col-lg-6">
-              <label for="">Pincode : </label>
-              <input type="number" class="form-control" name="pincode" formControlName="pincode" />
+
+            <div class="form-group row">
+              <div class="col-lg-12">
+                <label for="">Address : </label>
+                <textarea class="form-control" name="address" formControlName="address"></textarea>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-6">
-              <label for="">Size : </label>
-              <select class="col-lg-12 form-control" name="size" formControlName="size">
-                <option value="">Select</option>
-                <option *ngFor="let size of data.sizes;" value="{{ size }}">{{ size }}</option>
-              </select>
+            <div class="form-group row">
+              <div class="col-lg-6">
+                <label for="">Mobile No : </label>
+                <input type="number" class="form-control" name="mobileno" formControlName="mobileno" />
+              </div>
+              <div class="col-lg-6">
+                <label for="">Pincode : </label>
+                <input type="number" class="form-control" name="pincode" formControlName="pincode" />
+              </div>
             </div>
-            <div class="col-lg-6">
-              <label for="">Color : </label>
-              <select class="col-lg-12 form-control" name="color" formControlName="color">
-                <option value="">Select</option>
-                <option *ngFor="let color of data.colors;" value="{{ color }}">{{ color }}</option>
-              </select>
+            <div class="form-group row">
+              <div class="col-lg-6">
+                <label for="">Size : </label>
+                <select class="col-lg-12 form-control" name="size" formControlName="size">
+                  <option value="">Select</option>
+                  <option *ngFor="let size of data.sizes;" value="{{ size }}">{{ size }}</option>
+                </select>
+              </div>
+              <div class="col-lg-6">
+                <label for="">Color : </label>
+                <select class="col-lg-12 form-control" name="color" formControlName="color">
+                  <option value="">Select</option>
+                  <option *ngFor="let color of data.colors;" value="{{ color }}">{{ color }}</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-6">
-              <label for="">Quantity : </label>
-              <input type="number" class="form-control"  name="quantity" formControlName="quantity" (input)="quantitychanged($event)" />
+            <div class="form-group row">
+              <div class="col-lg-6">
+                <label for="">Quantity : </label>
+                <input type="number" class="form-control" name="quantity" formControlName="quantity"
+                  (input)="quantitychanged($event)" />
+              </div>
+              <div class="col-lg-6">
+                <label for="">Price : </label>
+                <input type="text" class="form-control" name="price" formControlName="price" readonly />
+              </div>
             </div>
-            <div class="col-lg-6">
-              <label for="">Price : </label>
-              <input type="text" class="form-control" name="price" formControlName="price" readonly />
+            <div class="form-group row">
+              <div class="col-lg-6">
+                <label for="">Shipping : </label>
+                <input type="text" class="form-control" name="shipping" formControlName="shipping" readonly />
+              </div>
+              <div class="col-lg-6">
+                <label for="">Total : </label>
+                <input type="text" class="form-control" name="total" formControlName="total" readonly />
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-6">
-              <label for="">Shipping : </label>
-              <input type="text" class="form-control" name="shipping" formControlName="shipping" readonly/>
-            </div>
-            <div class="col-lg-6">
-              <label for="">Total : </label>
-              <input type="text" class="form-control" name="total" formControlName="total" readonly />
-            </div>
-          </div>
-          <button type="submit" class="btn btn-success" [disabled]="!order.valid">
-            Place Order</button><br /><br />
-        </form>
+            <button type="submit" class="btn btn-success" [disabled]="!order.valid">
+              Place Order</button><br /><br />
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 </div>

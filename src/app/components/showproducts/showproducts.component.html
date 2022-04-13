@@ -7,14 +7,23 @@
         </div>
       </div>
     </div>
-    <div class="row" *ngIf="products != null">
-      <div class="col-lg-4 col-sm-6" *ngFor="let product of products; let i = index">
-        <div class="single_product_item">
-          <img src="{{ api.baseurl + product.imagepath}}" alt="" />
-          <div class="single_product_text">
-            <h4>{{ product.name }}</h4>
-            <h3>{{ product.price | currency: "INR" }}</h3>
-            <a class="add_cart" routerLink="../product/{{product._id}}">Buy Now</a>
+    <div>
+      <div>
+        <div class="row" *ngIf="products != null">
+          <div class="col-lg-4 col-sm-6" *ngFor="let product of products; let i = index">
+            <div class="single_product_item">
+              <img src="{{ api.baseurl + product.imagepath}}" alt="" />
+              <div class="single_product_text">
+                <h4>{{ product.name }}</h4>
+                <h3>{{ product.price | currency: "INR" }}</h3>
+                <div *ngIf="product.instock == 'Yes'">
+                  <a class="add_cart" routerLink="../product/{{product._id}}">Buy Now</a>
+                </div>
+                <div *ngIf="product.instock == 'No'">
+                  <a class="add_cart" >Out of Stock</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
